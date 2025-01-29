@@ -2,7 +2,7 @@
 
 namespace TestMovieWebApp.Server.Entities
 {
-    public class Actor: BaseIdentity
+    public class Actor: UserDateIdentity
     {
         public string Name { get; set; } = string.Empty;
         public virtual Guid? MovieId { get; set; }
