@@ -5,6 +5,12 @@ using TestMovieWebApp.Server.Services.Modules.Actors;
 
 namespace TestMovieWebApp.Server.Presentations.Controllers
 {
+    /// <summary>
+    ///     Actors controller.
+    /// </summary>
+    [ApiController]
+    [Route("actors")]
+    [Produces("application/json")]
     public class ActorsControllers
     {
         private readonly IActorsService _service;

@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commons\BaseServices\" />
     <Folder Include="Data\Repositories\" />
   </ItemGroup>
 

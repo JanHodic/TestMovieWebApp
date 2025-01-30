@@ -5,6 +5,12 @@ using TestMovieWebApp.Server.Services.Modules.Movies;
 
 namespace TestMovieWebApp.Server.Presentations.Controllers
 {
+    /// <summary>
+    ///     Movies controller.
+    /// </summary>
+    [ApiController]
+    [Route("movies")]
+    [Produces("application/json")]
     public class MoviesController
     {
         private readonly IMoviesService _service;

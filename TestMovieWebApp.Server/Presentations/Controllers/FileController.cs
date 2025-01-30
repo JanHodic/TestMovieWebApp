@@ -1,8 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using TestMovieWebApp.Server.Commons.Interfaces;
 
 namespace TestMovieWebApp.Server.Presentations.Controllers
 {
+    /// <summary>
+    ///     Files controller.
+    /// </summary>
+    [ApiController]
+    [Route("files")]
+    [Produces("application/json")]
     public class FileController
     {
         private readonly IFileReader _service;
