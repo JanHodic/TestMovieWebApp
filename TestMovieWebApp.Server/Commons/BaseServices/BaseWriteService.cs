@@ -1,4 +1,5 @@
-﻿using TestMovieWebApp.Server.Commons.BaseInterfaces;
+﻿using AutoMapper;
+using TestMovieWebApp.Server.Commons.BaseInterfaces;
 using TestMovieWebApp.Server.Commons.Models;
 
 namespace TestMovieWebApp.Server.Commons.BaseServices
