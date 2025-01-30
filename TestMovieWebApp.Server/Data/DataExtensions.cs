@@ -1,6 +1,7 @@
 ﻿using TestMovieWebApp.Server.Commons.Models;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using TestMovieWebApp.Server.Data.Repositories;
 
 namespace TestMovieWebApp.Server.Data
 {
@@ -24,6 +25,8 @@ namespace TestMovieWebApp.Server.Data
                         x => x.Ignore(CoreEventId.LazyLoadOnDisposedContextWarning)
                     ));
             //registering of repositories
+            services.AddScoped<IActorsRepository, ActorsRepository>();
+            services.AddScoped<IMoviesRepository, MoviesRepository>();
             return services;
         }
     }

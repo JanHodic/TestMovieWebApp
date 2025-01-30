@@ -11,6 +11,7 @@ namespace TestMovieWebApp.Server.Services.Commons
         public FileReader(IService service, IConfiguration configuration) 
         {
             _service = service;
+            _configuration = configuration;
         }
         public async Task<ICollection<object>> ReadFile<MainObject, OwnedObject>()
         {
