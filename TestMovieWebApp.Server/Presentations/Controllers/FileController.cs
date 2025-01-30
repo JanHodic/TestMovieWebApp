@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using TestMovieWebApp.Server.Commons.Interfaces;
+using TestMovieWebApp.Server.Dtos;
+using TestMovieWebApp.Server.Entities;
 
 namespace TestMovieWebApp.Server.Presentations.Controllers
 {
@@ -19,9 +21,9 @@ namespace TestMovieWebApp.Server.Presentations.Controllers
         }
 
         [HttpGet]
-        public async Task<ICollection<object>> ReadFile()
+        public async Task<ICollection<ActorDto>> ReadFile()
         {
-            var contents = await _service.ReadFile<object, object>();
+            var contents = await _service.ReadFile();
             return contents;
         }
     }
