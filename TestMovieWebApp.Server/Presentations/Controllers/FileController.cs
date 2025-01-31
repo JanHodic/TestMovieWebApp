@@ -21,7 +21,7 @@ namespace TestMovieWebApp.Server.Presentations.Controllers
         }
 
         [HttpGet]
-        public async Task<ICollection<MovieDto>> ReadFile()
+        public async Task<ICollection<Movie>> ReadFile()
         {
             var contents = await _service.ReadFile();
             return contents;

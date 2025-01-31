@@ -38,13 +38,13 @@ namespace TestMovieWebApp.Server.Services.Commons
                         var m = new Movie();
                         m.Title = movie["title"].ToString();
                         var cast = movie["cast"].AsArray();
-                        foreach(var c in cast)
+                        /*foreach(var c in cast)
                         {
                             var a = new Actor();
                             a.Movie = m;
                             a.Name = c.ToString();
                             m.Cast.Add(a);
-                        }
+                        }*/
                         movies.Add(m);
                     }
                     Console.WriteLine(line);
