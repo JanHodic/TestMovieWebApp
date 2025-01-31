@@ -6,6 +6,6 @@ namespace TestMovieWebApp.Server.Commons.Interfaces
 {
     public interface IFileReader
     {
-        public Task<ICollection<ActorDto>> ReadFile();
+        public Task<ICollection<MovieDto>> ReadFile();
     }
 }
