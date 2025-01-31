@@ -13,6 +13,8 @@ namespace TestMovieWebApp.Server.Services
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDataServices(configuration);
+            //automapper
+            services.AddAutoMapper(typeof(AutomapperConfigurationProfile));
             services.AddScoped<IMoviesService, MoviesService>();
             services.AddScoped<IActorsService, ActorsService>();
             services.AddScoped<IFileReader, FileReader>();
