@@ -1,10 +1,6 @@
-﻿using System.Text.Json;
-using TestMovieWebApp.Server.Commons.Interfaces;
+﻿using TestMovieWebApp.Server.Commons.Interfaces;
 using TestMovieWebApp.Server.Dtos;
-using TestMovieWebApp.Server.Rtos;
-using TestMovieWebApp.Server.Services.Modules.Actors;
 using System.Text.Json.Nodes;
-using TestMovieWebApp.Server.Services.Modules.Movies;
 using TestMovieWebApp.Server.Entities;
 using TestMovieWebApp.Server.Data.Repositories;
 using AutoMapper;

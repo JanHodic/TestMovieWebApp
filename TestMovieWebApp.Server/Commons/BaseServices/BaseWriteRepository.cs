@@ -38,13 +38,13 @@ namespace TestMovieWebApp.Server.Commons.BaseServices
 
         public virtual async Task<ICollection<T>> CreateOrUpdateManyAsync(ICollection<T> items)
         {
-            var ids = new List<Guid>();
+            var os = new List<T>();
             foreach (var item in items)
             {
                 var e = await this.CreateAsync(item);
-                ids.Add(e.Id);
+                os.Add(e);
             }
-            return await base.FindAllByIds(ids);
+            return os;
         }
 
         public virtual async Task<bool> DeleteAsync(Guid id)

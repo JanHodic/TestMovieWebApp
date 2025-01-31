@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using TestMovieWebApp.Server.Data.Repositories;
+using TestMovieWebApp.Server.Data.Triggers;
 
 namespace TestMovieWebApp.Server.Data
 {
@@ -17,8 +18,8 @@ namespace TestMovieWebApp.Server.Data
             services.AddDbContext<TestWebAppDbContext>(options =>
                 options.UseSqlServer(connectionString).UseTriggers(triggerOptions =>
                             triggerOptions
-                                .AddTrigger<UserDateIdentity>().MaxCascadeCycles(2)
-                    //.AddTrigger<HistoryTrigger>()
+                                .AddTrigger<BaseUserDateTrigger>().MaxCascadeCycles(2)
+                                .AddTrigger<SearchTrigger>()
                     )
                     .UseLazyLoadingProxies()
                     .ConfigureWarnings(

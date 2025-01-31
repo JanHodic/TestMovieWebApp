@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using System;
 using TestMovieWebApp.Server.Dtos;
 using TestMovieWebApp.Server.Entities;
-using TestMovieWebApp.Server.Rtos;
 
 namespace TestMovieWebApp.Server.Services.Commons
 {
