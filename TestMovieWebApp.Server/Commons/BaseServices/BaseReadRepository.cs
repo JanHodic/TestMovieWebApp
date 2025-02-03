@@ -46,7 +46,13 @@ namespace TestMovieWebApp.Server.Commons.BaseServices
 
         public virtual async Task<ICollection<T>> FindAllByIds(IEnumerable<Guid> ids)
         {
-            return await _dbSet.Where(p => ids.Contains(p.Id)).ToListAsync();
+            var items = new List<T>();
+            foreach (var id in ids)
+            {
+                var item = await _dbSet.FindAsync(id);
+                items.Add(item);
+            }
+            return items;
         }
     }
 }

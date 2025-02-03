@@ -8,20 +8,20 @@ namespace TestMovieWebApp.Server.Services.Commons
     {
         public AutomapperConfigurationProfile() 
         {
-            CreateMap<MovieDto, Movie>()
-                .ForMember(d => d.Cast, opt => opt.MapFrom(m => m.CastIds));
-            CreateMap<Movie, MovieDto>()
-                .ForMember(d => d.CastIds, opt => opt.MapFrom(m => m.Cast));
+            CreateMap<MovieDto, Movie>();
+                //.ForMember(d => d.Cast, opt => opt.Ignore());
+            CreateMap<Movie, MovieDto>();
+                //.ForMember(m => m.CastIds, opt => opt.ConvertUsing<ToIdsConverter, List<Actor>>());
             CreateMap<ActorDto, Actor>()
-                .ForMember(d => d.Movie, opt => opt.MapFrom(m => m.MovieId));
+                .ForMember(d => d.Movie, opt => opt.Ignore());
             CreateMap<Actor, ActorDto>()
-                .ForMember(d => d.MovieId, opt => opt.MapFrom(m => m.Movie));
+                .ForMember(d => d.MovieId, opt => opt.Ignore());
         }
-        /*
-        private class PeopleToIdsConverter : IValueConverter<List<Person>, List<int>>
+        
+        private class ToIdsConverter : IValueConverter<List<Actor>, List<Guid>>
         {
-            public List<int> Convert(List<Person> sourceMember, ResolutionContext context) =>
+            public List<Guid> Convert(List<Actor> sourceMember, ResolutionContext context) =>
                 sourceMember.Select(p => p.Id).ToList();
-        }*/
+        }
     }
 }

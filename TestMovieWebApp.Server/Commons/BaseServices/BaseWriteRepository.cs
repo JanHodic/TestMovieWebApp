@@ -36,13 +36,13 @@ namespace TestMovieWebApp.Server.Commons.BaseServices
             return entityEntry.Entity;
         }
 
-        public virtual async Task<ICollection<T>> CreateOrUpdateManyAsync(ICollection<T> items)
+        public virtual async Task<ICollection<Guid>> CreateOrUpdateManyAsync(ICollection<T> items)
         {
-            var os = new List<T>();
+            var os = new List<Guid>();
             foreach (var item in items)
             {
                 var e = await this.CreateAsync(item);
-                os.Add(e);
+                os.Add(e.Id);
             }
             return os;
         }

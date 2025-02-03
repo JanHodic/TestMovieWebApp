@@ -20,9 +20,9 @@ namespace TestMovieWebApp.Server.Presentations.Controllers
         }
 
         [HttpPost]
-        public async Task<MovieDto> Create(MovieDto createDesignDto)
+        public async Task<MovieDto> Create(MovieDto created)
         {
-            return await _service.CreateAsync(createDesignDto);
+            return await _service.CreateAsync(created);
         }
 
         [HttpGet("{id}")]

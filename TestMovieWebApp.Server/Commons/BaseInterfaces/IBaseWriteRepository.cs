@@ -26,7 +26,7 @@ namespace TestMovieWebApp.Server.Commons.BaseInterfaces
         /// </summary>
         /// <param name="item">Creates or updates given objects.</param>
         /// <returns>Returns the newly created records</returns>
-        public Task<ICollection<T>> CreateOrUpdateManyAsync(ICollection<T> items);
+        public Task<ICollection<Guid>> CreateOrUpdateManyAsync(ICollection<T> items);
         /// <summary>
         ///     Deletes a record.
         /// </summary>
