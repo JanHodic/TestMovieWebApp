@@ -25,6 +25,21 @@ namespace TestMovieWebApp.Server.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ActorMovie", b =>
+                {
+                    b.Property<Guid>("MovieId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ActorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MovieId", "ActorId");
+
+                    b.HasIndex("ActorId");
+
+                    b.ToTable("ActorMovie");
+                });
+
             modelBuilder.Entity("TestMovieWebApp.Server.Entities.Actor", b =>
                 {
                     b.Property<Guid>("Id")
@@ -34,33 +49,17 @@ namespace TestMovieWebApp.Server.Migrations
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTimeOffset?>("Deleted")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTimeOffset>("LastEdited")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastEditedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("MovieId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
 
                     b.ToTable("Actors");
                 });
@@ -74,22 +73,11 @@ namespace TestMovieWebApp.Server.Migrations
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTimeOffset?>("Deleted")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTimeOffset>("LastEdited")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastEditedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -100,18 +88,19 @@ namespace TestMovieWebApp.Server.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("TestMovieWebApp.Server.Entities.Actor", b =>
+            modelBuilder.Entity("ActorMovie", b =>
                 {
-                    b.HasOne("TestMovieWebApp.Server.Entities.Movie", "Movie")
-                        .WithMany("Actors")
-                        .HasForeignKey("MovieId");
+                    b.HasOne("TestMovieWebApp.Server.Entities.Actor", null)
+                        .WithMany()
+                        .HasForeignKey("ActorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("Movie");
-                });
-
-            modelBuilder.Entity("TestMovieWebApp.Server.Entities.Movie", b =>
-                {
-                    b.Navigation("Actors");
+                    b.HasOne("TestMovieWebApp.Server.Entities.Movie", null)
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

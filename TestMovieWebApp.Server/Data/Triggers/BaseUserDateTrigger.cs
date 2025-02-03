@@ -16,7 +16,7 @@ namespace TestMovieWebApp.Server.Data.Triggers
         }
 
         /// <summary>
-        /// Sets automatically the name and date of data changes
+        /// Sets automatically the date of data changes
         /// </summary>
         /// <param name="context"></param>
         /// <param name="cancellationToken"></param>

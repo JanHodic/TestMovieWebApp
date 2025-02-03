@@ -5,7 +5,6 @@ namespace TestMovieWebApp.Server.Entities
     public class Actor: UserDateIdentity
     {
         public string Name { get; set; } = string.Empty;
-        public virtual Guid? MovieId { get; set; }
-        public virtual Movie? Movie { get; set; }
+        public virtual ICollection<Movie>? Movies { get; set; } = new List<Movie>();
     }
 }

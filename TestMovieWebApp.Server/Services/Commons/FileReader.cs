@@ -10,6 +10,7 @@ namespace TestMovieWebApp.Server.Services.Commons
     public class FileReader: IFileReader
     {
         private readonly IMoviesRepository _service;
+        private readonly IActorsRepository _actorsRepository;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
         public FileReader(IMoviesRepository service, IMapper mapper, IConfiguration configuration) 

@@ -13,9 +13,9 @@ namespace TestMovieWebApp.Server.Services.Commons
             CreateMap<Movie, MovieDto>();
                 //.ForMember(m => m.CastIds, opt => opt.ConvertUsing<ToIdsConverter, List<Actor>>());
             CreateMap<ActorDto, Actor>()
-                .ForMember(d => d.Movie, opt => opt.Ignore());
+                .ForMember(d => d.Movies, opt => opt.Ignore());
             CreateMap<Actor, ActorDto>()
-                .ForMember(d => d.MovieId, opt => opt.Ignore());
+                .ForMember(d => d.MovieIds, opt => opt.Ignore());
         }
         
         private class ToIdsConverter : IValueConverter<List<Actor>, List<Guid>>
