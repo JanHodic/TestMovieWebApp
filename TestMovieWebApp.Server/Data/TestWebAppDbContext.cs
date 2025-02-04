@@ -14,6 +14,7 @@ namespace TestMovieWebApp.Server.Data
 
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<ActorMovie> ActorMovies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

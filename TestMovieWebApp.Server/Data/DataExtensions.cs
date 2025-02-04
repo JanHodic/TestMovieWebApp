@@ -19,7 +19,6 @@ namespace TestMovieWebApp.Server.Data
                 options.UseSqlServer(connectionString).UseTriggers(triggerOptions =>
                             triggerOptions
                                 .AddTrigger<BaseUserDateTrigger>().MaxCascadeCycles(2)
-                                .AddTrigger<SearchTrigger>()
                     )
                     .UseLazyLoadingProxies()
                     .ConfigureWarnings(

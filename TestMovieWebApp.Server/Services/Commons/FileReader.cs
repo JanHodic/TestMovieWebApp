@@ -44,11 +44,17 @@ namespace TestMovieWebApp.Server.Services.Commons
                             var a = new Actor();
                             a.Name = c.ToString();
                             Actor? oldActor = await _actorsRepository.FindByName(a.Name) ?? null;
-                            if (oldActor != null) continue;
+                            if (oldActor != null) 
+                            { 
+                                continue; 
+                            }
                             else m.Cast.Add(a);
                         }
                         var oldMovie = await _service.FindByTitle(m.Title) ?? null;
-                        if (oldMovie != null) continue;
+                        if (oldMovie != null) 
+                        { 
+                            continue; 
+                        }
                         else movies.Add(m);
                     }
                     Console.WriteLine(line);

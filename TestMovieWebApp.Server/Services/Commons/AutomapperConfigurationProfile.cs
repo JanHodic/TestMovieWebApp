@@ -18,6 +18,7 @@ namespace TestMovieWebApp.Server.Services.Commons
                 .ForMember(d => d.Movies, opt => opt.Ignore());
             CreateMap<Actor, ActorDto>()
                 .ForMember(d => d.MovieIds, opt => opt.Ignore());
+            CreateMap<Movie, ActorWithFilmsDto>();
             //CreateMap<List<Actor>, List<ActorDto>>();
             //CreateMap<List<ActorDto>, List<Actor>>();
         }

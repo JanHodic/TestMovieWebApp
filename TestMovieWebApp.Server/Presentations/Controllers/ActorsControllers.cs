@@ -31,6 +31,12 @@ namespace TestMovieWebApp.Server.Presentations.Controllers
             return await _service.GetAsync(guid);
         }
 
+        [HttpGet("{name}")]
+        public async Task<ActorWithFilmsDto> GetActorWithFilms(string name)
+        {
+
+        }
+
         [HttpGet]
         public async Task<ICollection<ActorDto>> GetAll()
         {
