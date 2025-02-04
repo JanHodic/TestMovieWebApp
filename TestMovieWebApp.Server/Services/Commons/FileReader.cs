@@ -13,9 +13,13 @@ namespace TestMovieWebApp.Server.Services.Commons
         private readonly IActorsRepository _actorsRepository;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
-        public FileReader(IMoviesRepository service, IMapper mapper, IConfiguration configuration) 
+        public FileReader(IMoviesRepository service,
+            IActorsRepository actorsRepository,
+            IMapper mapper, 
+            IConfiguration configuration) 
         {
             _service = service;
+            _actorsRepository = actorsRepository;
             _configuration = configuration;
             _mapper = mapper;
         }
@@ -35,15 +39,17 @@ namespace TestMovieWebApp.Server.Services.Commons
                         var m = new Movie();
                         m.Title = movie["title"].ToString();
                         var cast = movie["cast"].AsArray();
-                        var newMovie = _service.CreateAsync(m);
-                        var mId = newMovie.Id;
                         foreach(var c in cast)
                         {
                             var a = new Actor();
                             a.Name = c.ToString();
-                            m.Cast.Add(a);
+                            Actor? oldActor = await _actorsRepository.FindByName(a.Name) ?? null;
+                            if (oldActor != null) continue;
+                            else m.Cast.Add(a);
                         }
-                        movies.Add(m);
+                        var oldMovie = await _service.FindByTitle(m.Title) ?? null;
+                        if (oldMovie != null) continue;
+                        else movies.Add(m);
                     }
                     Console.WriteLine(line);
                 }

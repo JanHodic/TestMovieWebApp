@@ -25,7 +25,7 @@ namespace TestMovieWebApp.Server.Data.Repositories
                 var r = result.FirstOrDefault();
                 if (r is null)
                 {
-                    Console.WriteLine("User does not exist");
+                    Console.WriteLine("Actor does not exist");
                     return null;
                 }
                 else
