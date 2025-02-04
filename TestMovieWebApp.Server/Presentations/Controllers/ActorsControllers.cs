@@ -34,7 +34,7 @@ namespace TestMovieWebApp.Server.Presentations.Controllers
         [HttpGet("{name}")]
         public async Task<ActorWithFilmsDto> GetActorWithFilms(string name)
         {
-
+            throw new NotImplementedException();
         }
 
         [HttpGet]

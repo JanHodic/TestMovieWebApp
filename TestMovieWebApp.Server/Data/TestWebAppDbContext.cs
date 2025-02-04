@@ -22,10 +22,10 @@ namespace TestMovieWebApp.Server.Data
             modelBuilder.Entity<Actor>()
                 .HasMany<Movie>(s => s.Movies)
                 .WithMany(c => c.Cast)
-                .UsingEntity("ActorMovie",
+                .UsingEntity<ActorMovie>();/*"ActorMovie",
                 l => l.HasOne(typeof(Movie)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(Movie.Id)),
                 r => r.HasOne(typeof(Actor)).WithMany().HasForeignKey("ActorId").HasPrincipalKey(nameof(Actor.Id)),
-                j => j.HasKey("MovieId", "ActorId"));
+                j => j.HasKey("MovieId", "ActorId"));*/
 
             IEnumerable<IMutableForeignKey> cascadeFKs = modelBuilder.Model.GetEntityTypes()
                 .SelectMany(type => type.GetForeignKeys())

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using TestMovieWebApp.Server.Commons.BaseServices;
 using TestMovieWebApp.Server.Entities;
 
@@ -32,6 +33,23 @@ namespace TestMovieWebApp.Server.Data.Repositories
                     return r;
                 }
             }
+        }
+
+        public async Task<ActorMovie> AddExistingActorToMovie(Guid ActorId, Guid MovieId)
+        {
+            DbSet<ActorMovie> _dbSet = _dbEntity.ActorMovies;
+            EntityEntry<ActorMovie> entityEntry = _dbSet.Add(new ActorMovie { ActorId = ActorId, MovieId = MovieId });
+            try
+            {
+                await _dbEntity.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                new Exception("new content not saved");
+            }
+
+            new Exception("new entity added");
+            return entityEntry.Entity;
         }
     }
 }

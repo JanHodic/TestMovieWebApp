@@ -6,5 +6,6 @@ namespace TestMovieWebApp.Server.Entities
     {
         public string Name { get; set; } = string.Empty;
         public virtual ICollection<Movie>? Movies { get; set; } = new List<Movie>();
+        public virtual ICollection<ActorMovie> ActorMovies { get; set; } = new List<ActorMovie>();
     }
 }

@@ -25,7 +25,7 @@ namespace TestMovieWebApp.Server.Services.Commons
         }
         public async Task<ICollection<MovieDto>> ReadFile()
         {
-            var movies = new List<Movie>();
+            var insertedMoviesIds = new List<Guid>();
             try
             {
                 //provide to reader your complete text file
@@ -39,23 +39,32 @@ namespace TestMovieWebApp.Server.Services.Commons
                         var m = new Movie();
                         m.Title = movie["title"].ToString();
                         var cast = movie["cast"].AsArray();
-                        foreach(var c in cast)
+                        var oldMovie = await _service.FindByTitle(m.Title) ?? null;
+                        if (oldMovie != null)
+                        {
+                            continue;
+                        }
+
+                        var mov = await _service.CreateAsync(m);
+                        var movieId = mov.Id;
+                        insertedMoviesIds.Add(movieId);
+                        foreach (var c in cast)
                         {
                             var a = new Actor();
                             a.Name = c.ToString();
                             Actor? oldActor = await _actorsRepository.FindByName(a.Name) ?? null;
-                            if (oldActor != null) 
-                            { 
-                                continue; 
+                            if (oldActor != null)
+                            {
+                                await _service.AddExistingActorToMovie(oldActor.Id, movieId);
+                                continue;
                             }
-                            else m.Cast.Add(a);
+                            else 
+                            { 
+                                var newActor = await _actorsRepository.CreateAsync(a);
+                                var actorId = newActor.Id;
+                                await _service.AddExistingActorToMovie(actorId, movieId);
+                            }
                         }
-                        var oldMovie = await _service.FindByTitle(m.Title) ?? null;
-                        if (oldMovie != null) 
-                        { 
-                            continue; 
-                        }
-                        else movies.Add(m);
                     }
                     Console.WriteLine(line);
                 }
@@ -65,7 +74,6 @@ namespace TestMovieWebApp.Server.Services.Commons
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
             }
-            var insertedMoviesIds = await _service.CreateOrUpdateManyAsync(movies);
             
             var insertedMovies = await _service.FindAllByIds(insertedMoviesIds);
             return _mapper.Map<List<MovieDto>>(insertedMovies);

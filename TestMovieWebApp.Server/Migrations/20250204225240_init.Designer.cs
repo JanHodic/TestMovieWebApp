@@ -12,7 +12,7 @@ using TestMovieWebApp.Server.Data;
 namespace TestMovieWebApp.Server.Migrations
 {
     [DbContext(typeof(TestWebAppDbContext))]
-    [Migration("20250203132550_init")]
+    [Migration("20250204225240_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -27,21 +27,6 @@ namespace TestMovieWebApp.Server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ActorMovie", b =>
-                {
-                    b.Property<Guid>("MovieId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ActorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("MovieId", "ActorId");
-
-                    b.HasIndex("ActorId");
-
-                    b.ToTable("ActorMovie");
-                });
 
             modelBuilder.Entity("TestMovieWebApp.Server.Entities.Actor", b =>
                 {
@@ -65,6 +50,36 @@ namespace TestMovieWebApp.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Actors");
+                });
+
+            modelBuilder.Entity("TestMovieWebApp.Server.Entities.ActorMovie", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ActorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("Deleted")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("LastEdited")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("MovieId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActorId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("ActorMovies");
                 });
 
             modelBuilder.Entity("TestMovieWebApp.Server.Entities.Movie", b =>
@@ -91,19 +106,33 @@ namespace TestMovieWebApp.Server.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("ActorMovie", b =>
+            modelBuilder.Entity("TestMovieWebApp.Server.Entities.ActorMovie", b =>
                 {
-                    b.HasOne("TestMovieWebApp.Server.Entities.Actor", null)
-                        .WithMany()
+                    b.HasOne("TestMovieWebApp.Server.Entities.Actor", "Actor")
+                        .WithMany("ActorMovies")
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("TestMovieWebApp.Server.Entities.Movie", null)
-                        .WithMany()
+                    b.HasOne("TestMovieWebApp.Server.Entities.Movie", "Movie")
+                        .WithMany("ActorMovies")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Actor");
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("TestMovieWebApp.Server.Entities.Actor", b =>
+                {
+                    b.Navigation("ActorMovies");
+                });
+
+            modelBuilder.Entity("TestMovieWebApp.Server.Entities.Movie", b =>
+                {
+                    b.Navigation("ActorMovies");
                 });
 #pragma warning restore 612, 618
         }
