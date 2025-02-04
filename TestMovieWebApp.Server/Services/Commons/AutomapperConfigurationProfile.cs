@@ -9,13 +9,17 @@ namespace TestMovieWebApp.Server.Services.Commons
         public AutomapperConfigurationProfile() 
         {
             CreateMap<MovieDto, Movie>();
-                //.ForMember(d => d.Cast, opt => opt.Ignore());
+            CreateMap<List<MovieDto>, List<Movie>>();
+            //.ForMember(d => d.Cast, opt => opt.Ignore());
             CreateMap<Movie, MovieDto>();
-                //.ForMember(m => m.CastIds, opt => opt.ConvertUsing<ToIdsConverter, List<Actor>>());
+            CreateMap<List<Movie>, List<MovieDto>>();
+            //.ForMember(m => m.CastIds, opt => opt.ConvertUsing<ToIdsConverter, List<Actor>>());
             CreateMap<ActorDto, Actor>()
                 .ForMember(d => d.Movies, opt => opt.Ignore());
             CreateMap<Actor, ActorDto>()
                 .ForMember(d => d.MovieIds, opt => opt.Ignore());
+            CreateMap<List<Actor>, List<ActorDto>>();
+            CreateMap<List<ActorDto>, List<Actor>>();
         }
         
         private class ToIdsConverter : IValueConverter<List<Actor>, List<Guid>>

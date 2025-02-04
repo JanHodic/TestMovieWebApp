@@ -11,5 +11,10 @@ namespace TestMovieWebApp.Server.Services.Modules.Movies
         public MoviesService(ILogger<Movie> eventLogger, IMoviesRepository repository, IMapper mapper) : base(eventLogger, repository, mapper)
         {
         }
+
+        public override Task<MovieDto> CreateAsync(MovieDto item)
+        {
+            return base.CreateAsync(item);
+        }
     }
 }

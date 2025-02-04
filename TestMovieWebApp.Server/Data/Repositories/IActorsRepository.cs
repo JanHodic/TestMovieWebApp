@@ -5,5 +5,6 @@ namespace TestMovieWebApp.Server.Data.Repositories
 {
     public interface IActorsRepository: IBaseReadRepository<Actor>, IBaseWriteRepository<Actor>
     {
+        public Task<Actor> FindByName(string name);
     }
 }
