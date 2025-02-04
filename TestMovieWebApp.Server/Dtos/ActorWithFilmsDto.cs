@@ -1,9 +1,11 @@
-﻿namespace TestMovieWebApp.Server.Dtos
+﻿using TestMovieWebApp.Server.Entities;
+
+namespace TestMovieWebApp.Server.Dtos
 {
     public class ActorWithFilmsDto
     {
-        public string Name { get; set; } = string.Empty;
+        public ICollection<Actor> Actors { get; set; } = new List<Actor>();
 
-        public ICollection<MovieDto> Movies { get; set; }
+        public ICollection<Movie> Movies { get; set; } = new List<Movie>();
     }
 }

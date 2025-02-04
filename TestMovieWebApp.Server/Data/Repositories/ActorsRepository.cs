@@ -34,5 +34,11 @@ namespace TestMovieWebApp.Server.Data.Repositories
                 }
             }
         }
+
+        public async Task<ICollection<ActorMovie>> ReturnAllKeyPairs() 
+        {
+            DbSet<ActorMovie> ams = _dbEntity.ActorMovies;
+            return await ams.ToListAsync();
+        }
     }
 }

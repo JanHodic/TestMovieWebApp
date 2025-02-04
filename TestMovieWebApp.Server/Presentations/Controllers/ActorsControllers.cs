@@ -31,8 +31,8 @@ namespace TestMovieWebApp.Server.Presentations.Controllers
             return await _service.GetAsync(guid);
         }
 
-        [HttpGet("{name}")]
-        public async Task<ActorWithFilmsDto> GetActorWithFilms(string name)
+        [HttpGet("{name1},{name2}")]
+        public async Task<ActorWithFilmsDto> GetActorWithFilms(string name1, string name2)
         {
             throw new NotImplementedException();
         }
