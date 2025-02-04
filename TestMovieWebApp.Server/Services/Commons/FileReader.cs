@@ -35,6 +35,8 @@ namespace TestMovieWebApp.Server.Services.Commons
                         var m = new Movie();
                         m.Title = movie["title"].ToString();
                         var cast = movie["cast"].AsArray();
+                        var newMovie = _service.CreateAsync(m);
+                        var mId = newMovie.Id;
                         foreach(var c in cast)
                         {
                             var a = new Actor();
