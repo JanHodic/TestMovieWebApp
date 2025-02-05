@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Linq;
 using TestMovieWebApp.Server.Commons.BaseServices;
 using TestMovieWebApp.Server.Data.Repositories;
 using TestMovieWebApp.Server.Dtos;
@@ -19,12 +20,32 @@ namespace TestMovieWebApp.Server.Services.Modules.Actors
 
             var keyPairs = await _repository.ReturnAllKeyPairs();
             List<ActorMovie> ams = new List<ActorMovie>();
-            IDictionary<Guid, Guid> pairs = new Dictionary<Guid, Guid>();
-            foreach (var keyPair in keyPairs) 
+
+            //Toto zavru do rekurze a do while cyklu.
+            var am = keyPairs.Where(o => o.ActorId == actor1.Id || o.ActorId == actor2.Id).ToList();
+            ams.AddRange(am);
+            foreach (var a in ams) 
             {
-                pairs.Add(keyPair.ActorId, keyPair.MovieId);
+                keyPairs.Remove(a);
             }
 
+            var movieIds = ams.Select(o => o.MovieId).ToList();
+            foreach (var movieId in movieIds) 
+            {
+                var selectedByMovieId = keyPairs.Where(o => o.MovieId == movieId).ToList();
+                ams.AddRange(selectedByMovieId);
+                foreach(var p in selectedByMovieId)
+                {
+                    keyPairs.Remove(p);
+                }
+                var selectedByActorId = keyPairs.Where(o => o.ActorId == movieId).ToList();
+            }
+
+            while (keyPairs.Count > 0)
+            { 
+                
+            }
+            
             var result = new ActorWithFilmsDto() { Actors = { actor1 } };
 
             return result;
