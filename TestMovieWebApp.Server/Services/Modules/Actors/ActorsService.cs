@@ -16,23 +16,16 @@ namespace TestMovieWebApp.Server.Services.Modules.Actors
         {
             var actor1 = await _repository.FindByName(name1);
             var actor2 = await _repository.FindByName(name2);
-            var movies1 = actor1.Movies;
-            var movies2 = actor2.Movies;
+
+            var keyPairs = await _repository.ReturnAllKeyPairs();
+            List<ActorMovie> ams = new List<ActorMovie>();
+            IDictionary<Guid, Guid> pairs = new Dictionary<Guid, Guid>();
+            foreach (var keyPair in keyPairs) 
+            {
+                pairs.Add(keyPair.ActorId, keyPair.MovieId);
+            }
 
             var result = new ActorWithFilmsDto() { Actors = { actor1 } };
-
-            foreach (var m1 in movies1)
-            {
-                if (movies2.Contains(m1))
-                {
-                    result.Movies.Add(m1);
-                    result.Actors.Add(actor2);
-                }
-                else 
-                {
-                    
-                }
-            }
 
             return result;
         }
